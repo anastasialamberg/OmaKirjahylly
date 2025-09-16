@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
           </li>
           <li>
             <Link
-              to="/haku"
+              to="/booksearch"
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
               Hae kirjoja
@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
           </li>
           <li>
             <Link
-              to="/kirjahylly"
+              to="/booklist"
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
               Sinun kirjahyllysi

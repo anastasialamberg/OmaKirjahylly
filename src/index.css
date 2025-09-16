@@ -21,7 +21,7 @@ body {
   justify-content: center;
 }
 
-/* Linkkien tyyli */
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -31,10 +31,10 @@ a {
 
 a:hover {
   color: #1d4ed8;
-  /* Tailwindin sininen */
+ 
 }
 
-/* Otsikot */
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -42,7 +42,7 @@ h1 {
   color: #111827;
 }
 
-/* Nappien perusmuotoilu */
+
 button {
   border-radius: 0.75rem;
   border: 1px solid transparent;
@@ -59,29 +59,29 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* Navbar yleiset tyylit */
+
 nav {
   position: fixed;
   top: 1.5rem;
-  /* vastaa Tailwind top-6 */
+  
   right: 2rem;
-  /* vastaa Tailwind right-8 */
+  
   display: flex;
   gap: 1.5rem;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(8px);
   padding: 0.75rem 1.5rem;
   border-radius: 9999px;
-  /* täysin pyöreä */
+
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   z-index: 50;
-  /* aina päällä */
+ 
 }
 
-/* Linkkien tyyli navbarissa */
+
 nav a {
   color: #374151;
-  /* harmaa-700 */
+ 
   font-weight: 500;
   text-decoration: none;
   transition: color 0.2s ease, transform 0.2s ease;
@@ -89,6 +89,6 @@ nav a {
 
 nav a:hover {
   color: #1d4ed8;
-  /* sininen-700 */
+
   transform: translateY(-1px);
 }
