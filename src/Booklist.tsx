@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { getFavorites, type Book, removeFromFavorites } from "./Favorites";
+import { getFavorites, removeFromFavorites, type Book } from "./Favorites";
 
 interface Props {
   userId: string;
 }
-interface LocalBook {
-  id: string;
-  title: string;
-  authors?: string[];
-  thumbnail?: string;
-}
 
 const BookList: React.FC<Props> = ({ userId }) => {
-  const [favorites, setFavorites] = useState<LocalBook[]>([]);
+  const [favorites, setFavorites] = useState<Book[]>([]);
 
   useEffect(() => {
     const fetchFavorites = async () => {
-      const favs = await getFavorites(userId);
-      setFavorites(favs);
+      try {
+        const favs = await getFavorites(userId);
+        setFavorites(favs || []);
+      } catch (err) {
+        console.error("Suosikkien haku epäonnistui:", err);
+      }
     };
     fetchFavorites();
   }, [userId]);

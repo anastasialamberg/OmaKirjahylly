@@ -1,20 +1,27 @@
-import React, { useState } from "react";
-import { addToFavorites } from "./Favorites";
+import React, { useState, useEffect } from "react";
+import { addToFavorites, type Book, getFavorites } from "./Favorites";
 
-interface Book {
-  id: string;
-  title: string;
-  authors?: string[];
-  thumbnail?: string;
+interface BookSearchProps {
+  userId: string;
 }
 
-const BookSearch: React.FC = () => {
+const BookSearch: React.FC<BookSearchProps> = ({ userId }) => {
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState<Book[]>([]);
+  const [favorites, setFavorites] = useState<Book[]>([]);
   const [page, setPage] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
 
   const maxResults = 10;
+
+  // Lataa käyttäjän suosikit Firebaseesta
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      const favs = await getFavorites(userId);
+      setFavorites(favs || []);
+    };
+    fetchFavorites();
+  }, [userId]);
 
   const searchBooks = async (pageIndex = 0) => {
     const startIndex = pageIndex * maxResults;
@@ -28,17 +35,28 @@ const BookSearch: React.FC = () => {
     const data = await res.json();
     setTotalItems(data.totalItems || 0);
 
-    const mappedBooks: Book[] = data.items?.map((item: any) => ({
-      id: item.id,
-      title: item.volumeInfo.title,
-      authors: item.volumeInfo.authors,
-      thumbnail: item.volumeInfo.imageLinks?.thumbnail,
-    })) || [];
+    const mappedBooks: Book[] =
+      data.items?.map((item: any) => ({
+        id: item.id,
+        title: item.volumeInfo.title,
+        authors: item.volumeInfo.authors,
+        thumbnail: item.volumeInfo.imageLinks?.thumbnail,
+      })) || [];
 
     setBooks(mappedBooks);
     setPage(pageIndex);
   };
 
+const handleAddToFavorites = async (book: Book) => {
+  const alreadyFavorited =
+    Array.isArray(favorites) &&
+    favorites.findIndex((fav) => fav?.id === book.id) !== -1;
+
+  if (!alreadyFavorited) {
+    await addToFavorites(book, userId); // pelkkä lisäys Firebasen
+    setFavorites((prev) => [...prev, book]); // päivitä paikallinen tila
+  }
+};
 
 
   const totalPages = Math.ceil(totalItems / maxResults);
@@ -67,7 +85,7 @@ const BookSearch: React.FC = () => {
             <p>{book.authors?.join(", ")}</p>
             <button
               className="bg-green-500 text-white px-2 py-1 rounded mt-2"
-              onClick={() => addToFavorites(book, "test-user")}
+              onClick={() => handleAddToFavorites(book)}
             >
               ⭐ Lisää suosikkeihin
             </button>

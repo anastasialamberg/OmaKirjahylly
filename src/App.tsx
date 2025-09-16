@@ -62,7 +62,7 @@ function App() {
         </div>
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/booksearch" element={<BookSearch />} />
+          <Route path="/booksearch" element={<BookSearch userId={user.uid} />} />
           <Route path="/booklist" element={<BookList userId={user.uid} />} />
         </Routes>
       </div>
