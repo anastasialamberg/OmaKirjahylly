@@ -4,10 +4,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-white shadow-md">
       <div className="container mx-auto flex items-center justify-between p-4">
-        {/* Logo */}
-        <div className="text-2xl font-bold text-blue-600">
-          <Link to="/">MyApp</Link>
-        </div>
+       
 
         {/* Navigation links */}
         <ul className="flex space-x-6">

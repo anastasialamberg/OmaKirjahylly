@@ -33,13 +33,13 @@ const BookList: React.FC<Props> = ({ userId }) => {
       ) : (
         <div className="grid grid-cols-2 gap-4 mt-4">
           {favorites.map((book) => (
-            <div key={book.id} className="border p-2 rounded shadow">
+            <div key={book.id} className="border p-2 rounded shadow flex flex-col items-center text-center">
               {book.thumbnail ? (
                 <img src={book.thumbnail} alt={book.title} />
               ) : (
                 <img src="/placeholder.png" alt="Ei kansikuvaa" />
               )}
-              <h3 className="font-semibold">{book.title}</h3>
+              <h3 className="font-semibold mt-2">{book.title}</h3>
               <p>{book.authors?.join(", ")}</p>
               <button
                 className="bg-red-500 text-white px-2 py-1 rounded mt-2"

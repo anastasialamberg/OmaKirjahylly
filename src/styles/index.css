@@ -1,10 +1,15 @@
+/* Tailwindin tuonti */
+
+@import "tailwindcss";
+
+/* Omat globaalit tyylit - selkeät ja rauhalliset värit ilman gradientteja */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light;
-  color: #213547;
-  background-color: #ffffff;
+  color: #22223b; /* tumma harmaa */
+  background-color: #f7f7fa; /* vaalea harmaa */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,80 +20,133 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f9fafb;
+  background-color: #f7f7fa;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-
+/* Linkit */
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #3b82f6; /* selkeä sininen */
   text-decoration: none;
   transition: color 0.2s ease;
 }
-
 a:hover {
-  color: #1d4ed8;
- 
+  color: #2563eb; /* tummempi sininen */
 }
 
-
+/* Otsikot */
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
   font-weight: 700;
-  color: #111827;
+  color: #22223b;
+}
+h2 {
+  font-size: 2em;
+  font-weight: 600;
+  color: #374151; /* neutraali harmaa */
+  margin-bottom: 0.5em;
+  letter-spacing: 0.01em;
+}
+h3 {
+  font-size: 1.25em;
+  font-weight: 500;
+  color: #6b7280; /* vaalea harmaa */
+  margin-bottom: 0.25em;
 }
 
-
+/* Nappulat */
 button {
   border-radius: 0.75rem;
-  border: 1px solid transparent;
+  border: 1px solid #cbd5e1;
   padding: 0.75em 1.25em;
   font-size: 1em;
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
-  transition: all 0.25s ease;
+  background: rgb(49, 111, 159); 
+  color: rgb(247, 249, 249);
+  box-shadow: 0 2px 8px rgba(146, 160, 177, 0.08);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
-
+button:hover {
+  background: #2b4765; /* vaaleansininen hover */
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 16px rgba(160, 174, 192, 0.15);
+}
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid #3b82f6;
 }
 
-
+/* Navigaatio */
 nav {
   position: fixed;
   top: 1.5rem;
-  
   right: 2rem;
-  
   display: flex;
   gap: 1.5rem;
-  background: rgba(255, 255, 255, 0.8);
+  background: #f1f5f9;
   backdrop-filter: blur(8px);
   padding: 0.75rem 1.5rem;
   border-radius: 9999px;
-
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(160, 174, 192, 0.08);
   z-index: 50;
- 
 }
-
-
 nav a {
   color: #374151;
- 
   font-weight: 500;
   text-decoration: none;
   transition: color 0.2s ease, transform 0.2s ease;
 }
-
 nav a:hover {
-  color: #1d4ed8;
-
+  color: rgb(49, 111, 159);
   transform: translateY(-1px);
+}
+
+/* Kirjakortit */
+.book-card {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(160, 174, 192, 0.07);
+  padding: 1.5rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1px solid #e5e7eb;
+}
+.book-card:hover {
+  box-shadow: 0 8px 32px rgba(160, 174, 192, 0.12);
+  transform: translateY(-4px) scale(1.03);
+}
+
+/* Responsiivinen grid */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Ilmoitusviestit */
+.alert-success {
+  background: #e0f2fe;
+  color: #2563eb;
+  border-radius: 0.75rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+}
+.alert-error {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 0.75rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.08);
 }

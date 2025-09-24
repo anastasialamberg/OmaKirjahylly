@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { addToFavorites, type Book, getFavorites } from "./Favorites";
 
 interface BookSearchProps {
@@ -11,10 +11,11 @@ const BookSearch: React.FC<BookSearchProps> = ({ userId }) => {
   const [favorites, setFavorites] = useState<Book[]>([]);
   const [page, setPage] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
+  const [successMessage, setSuccessMessage] = useState("");
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const maxResults = 10;
 
-  
   useEffect(() => {
     const fetchFavorites = async () => {
       const favs = await getFavorites(userId);
@@ -47,45 +48,71 @@ const BookSearch: React.FC<BookSearchProps> = ({ userId }) => {
     setPage(pageIndex);
   };
 
-const handleAddToFavorites = async (book: Book) => {
-  console.log("Lisätään suosikkeihin:", book);
-  const alreadyFavorited =
-    Array.isArray(favorites) &&
-    favorites.findIndex((fav) => fav?.id === book.id) !== -1;
+  const handleAddToFavorites = async (book: Book) => {
+    const alreadyFavorited =
+      Array.isArray(favorites) &&
+      favorites.findIndex((fav) => fav?.id === book.id) !== -1;
 
-  if (!alreadyFavorited) {
-    await addToFavorites(book, userId); 
-    setFavorites((prev) => [...prev, book]); 
-  }
-};
+    if (!alreadyFavorited) {
+      await addToFavorites(book, userId);
+      setFavorites((prev) => [...prev, book]);
+      setSuccessMessage(`Kirja "${book.title}" lisättiin suosikkeihin!`);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => setSuccessMessage(""), 5000);
+    }
+  };
 
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const totalPages = Math.ceil(totalItems / maxResults);
 
   return (
     <div className="p-4">
-      <h1 className="text-xl font-bold">Hae kirjoja</h1>
-      <input
-        className="border p-2 mr-2"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Etsi kirjaa..."
-      />
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-        onClick={() => searchBooks(0)}
-      >
-        Hae
-      </button>
+      <h1 className="text-xl font-bold mb-4">Hae kirjoja</h1>
+      <div className="flex gap-2 mb-4">
+        <input
+          className="border p-2 flex-1 rounded"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Etsi kirjaa..."
+        />
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+          onClick={() => searchBooks(0)}
+        >
+          Hae
+        </button>
+      </div>
 
-      <div className="grid grid-cols-2 gap-4 mt-4">
+      {successMessage && (
+        <div className="bg-green-100 text-green-700 px-4 py-2 rounded mb-4">
+          {successMessage}
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {books.map((book) => (
-          <div key={book.id} className="border p-2 rounded shadow">
-            {book.thumbnail && <img src={book.thumbnail} alt={book.title} />}
-            <h2 className="font-semibold">{book.title}</h2>
-            <p>{book.authors?.join(", ")}</p>
+          <div
+            key={book.id}
+            className="border rounded-2xl shadow p-4 flex flex-col items-center hover:shadow-lg transition w-full"
+          >
+            {book.thumbnail && (
+              <img
+                src={book.thumbnail}
+                alt={book.title}
+                className="mb-3 h-40 w-auto max-w-full object-contain"
+              />
+            )}
+            <h2 className="font-semibold text-center mb-1">{book.title}</h2>
+            <p className="text-sm text-gray-700 text-center">
+              {book.authors?.join(", ")}
+            </p>
             <button
-              className="bg-green-500 text-white px-2 py-1 rounded mt-2"
+              className="bg-green-500 text-white px-3 py-1 rounded mt-3 w-auto inline-block"
               onClick={() => handleAddToFavorites(book)}
             >
               ⭐ Lisää suosikkeihin
@@ -96,7 +123,7 @@ const handleAddToFavorites = async (book: Book) => {
 
       {/* Sivutus */}
       {totalItems > 0 && (
-        <div className="flex items-center justify-center gap-2 mt-4">
+        <div className="flex items-center justify-center gap-2 mt-6">
           <button
             disabled={page === 0}
             onClick={() => searchBooks(page - 1)}

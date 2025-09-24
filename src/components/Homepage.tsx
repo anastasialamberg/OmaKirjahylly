@@ -2,11 +2,7 @@
 function Homepage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav>
-        <a href="/">Etusivu</a>
-        <a href="/booklist">Kirjat</a>
-        <a href="/booksearch">Lisää kirja</a>
-      </nav>
+    
 
     
       <div className="grid place-items-center min-h-screen px-4">
