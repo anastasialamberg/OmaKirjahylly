@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./Navbar";
-import BookList from "./Booklist";
-import BookSearch from "./BookSearch";
-import Homepage from "./Homepage";
+import Navbar from "./components/Navbar";
+import BookList from "./components/Booklist";
+import BookSearch from "./components/BookSearch";
+import Homepage from "./components/Homepage";
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
-import { login, register, logout } from "./authService";
+import { login, register, logout } from "./services/authService";
 
 function App() {
   const user = useAuth();

@@ -14,7 +14,7 @@ const BookSearch: React.FC<BookSearchProps> = ({ userId }) => {
 
   const maxResults = 10;
 
-  // Lataa käyttäjän suosikit Firebaseesta
+  
   useEffect(() => {
     const fetchFavorites = async () => {
       const favs = await getFavorites(userId);
@@ -40,7 +40,7 @@ const BookSearch: React.FC<BookSearchProps> = ({ userId }) => {
         id: item.id,
         title: item.volumeInfo.title,
         authors: item.volumeInfo.authors,
-        thumbnail: item.volumeInfo.imageLinks?.thumbnail,
+        thumbnail: item.volumeInfo.imageLinks?.thumbnail || null,
       })) || [];
 
     setBooks(mappedBooks);
@@ -48,13 +48,14 @@ const BookSearch: React.FC<BookSearchProps> = ({ userId }) => {
   };
 
 const handleAddToFavorites = async (book: Book) => {
+  console.log("Lisätään suosikkeihin:", book);
   const alreadyFavorited =
     Array.isArray(favorites) &&
     favorites.findIndex((fav) => fav?.id === book.id) !== -1;
 
   if (!alreadyFavorited) {
-    await addToFavorites(book, userId); // pelkkä lisäys Firebasen
-    setFavorites((prev) => [...prev, book]); // päivitä paikallinen tila
+    await addToFavorites(book, userId); 
+    setFavorites((prev) => [...prev, book]); 
   }
 };
 
