@@ -116,15 +116,12 @@ function App() {
   </button>
 </div>
 
-       <Router>
-  <Navbar />
-  <Routes>
-    <Route path="/" element={<Homepage />} />
-    <Route path="/booksearch" element={<BookSearch userId={user.uid} />} />
-    <Route path="/booklist" element={<BookList userId={user.uid} />} />
-    <Route path="/editbook/:bookId" element={<EditBook userId={user.uid} />} />
-  </Routes>
-</Router>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/booksearch" element={<BookSearch userId={user.uid} />} />
+          <Route path="/booklist" element={<BookList userId={user.uid} />} />
+          <Route path="/editbook/:bookId" element={<EditBook userId={user.uid} />} />
+        </Routes>
       </div>
     </Router>
   );
