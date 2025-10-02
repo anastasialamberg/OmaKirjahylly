@@ -3,9 +3,11 @@ import Navbar from "./components/Navbar";
 import BookList from "./components/Booklist";
 import BookSearch from "./components/BookSearch";
 import Homepage from "./components/Homepage";
+import EditBook from "./components/EditBook";
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "./hooks/useAuth";
 import { login, register, logout } from "./services/authService";
+import bookImage from "./images/undraw_book-lover.svg"
 
 function App() {
   const user = useAuth();
@@ -47,7 +49,7 @@ function App() {
   const handleLogin = async (email: string, password: string) => {
     try {
       await login(email, password);
-      showError("Kirjautuminen onnistui!"); // Näytetään onnistumisviesti
+      showError("Kirjautuminen onnistui!"); 
     } catch (error: any) {
       showError("Kirjautuminen epäonnistui. Tarkista tunnukset.");
     }
@@ -72,7 +74,7 @@ function App() {
           placeholder="Sähköposti"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border p-2 rounded"
+          className="border p-2 rounded mt-6"
         />
         <input
           type="password"
@@ -90,11 +92,13 @@ function App() {
           </button>
           <button
             onClick={() => handleRegister(email, password)}
-            className="bg-green-500 text-white px-4 py-2 rounded"
+            className="bg-green-500 text-white px-4 py-2 rounded "
           >
             Rekisteröidy
           </button>
         </div>
+        
+        <img src={bookImage} alt="Kirja kuva" className="w-1/3 mt-10" /> 
       </div>
     );
   }
@@ -102,19 +106,21 @@ function App() {
     <Router>
       <Navbar />
       <div className="p-6">
-        <div className="flex justify-between items-center mb-4">
-          <span className="text-gray-600">Kirjautunut: {user.email}</span>
-          <button
-            onClick={logout}
-            className="bg-red-500 text-white px-3 py-1 rounded"
-          >
-            Kirjaudu ulos
-          </button>
-        </div>
+      <div className="fixed top-0 right-0 p-4 flex items-center space-x-4 bg-white  rounded-md shadow-md z-50">
+  <span className="text-gray-600">Kirjautunut: {user.email}</span>
+  <button
+    onClick={logout}
+    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+  >
+    Kirjaudu ulos
+  </button>
+</div>
+
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/booksearch" element={<BookSearch userId={user.uid} />} />
           <Route path="/booklist" element={<BookList userId={user.uid} />} />
+          <Route path="/editbook/:bookId" element={<EditBook userId={user.uid} />} />
         </Routes>
       </div>
     </Router>

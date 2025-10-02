@@ -1,5 +1,10 @@
-
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  signOut, 
+  setPersistence, 
+  browserSessionPersistence 
+} from "firebase/auth";
 import { auth } from "./firebase";
 
 export async function register(email: string, password: string) {
@@ -7,6 +12,7 @@ export async function register(email: string, password: string) {
 }
 
 export async function login(email: string, password: string) {
+  await setPersistence(auth, browserSessionPersistence);
   return await signInWithEmailAndPassword(auth, email, password);
 }
 

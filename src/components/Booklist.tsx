@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getFavorites, removeFromFavorites, type Book } from "./Favorites";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   userId: string;
@@ -7,6 +8,7 @@ interface Props {
 
 const BookList: React.FC<Props> = ({ userId }) => {
   const [favorites, setFavorites] = useState<Book[]>([]);
+    const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -41,12 +43,23 @@ const BookList: React.FC<Props> = ({ userId }) => {
               )}
               <h3 className="font-semibold mt-2">{book.title}</h3>
               <p>{book.authors?.join(", ")}</p>
+              <p>{book.publishedDate}</p>
+              <p>{book.publisher}</p>
               <button
                 className="bg-red-500 text-white px-2 py-1 rounded mt-2"
                 onClick={() => handleRemove(book.id)}
               >
-                ❌ Poista
+                Poista
               </button>
+
+               <button
+                className="bg-blue-500 text-white px-2 py-1 rounded mt-2"
+                 onClick={() => navigate(`/editbook/${book.id}`)}
+              >
+                 Lisää muistiinpano
+              </button>
+
+            
             </div>
           ))}
         </div>

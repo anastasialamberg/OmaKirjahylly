@@ -2,11 +2,9 @@ import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="bg-white shadow-md">
-      <div className="container mx-auto flex items-center justify-between p-4">
+    <nav className="bg-white shadow-md w-full fixed top-0 left-0 z-50 h-14">
+      <div className="container mx-auto flex items-center h-full">
        
-
-        {/* Navigation links */}
         <ul className="flex space-x-6">
           <li>
             <Link
