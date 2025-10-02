@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import BookList from "./components/Booklist";
 import BookSearch from "./components/BookSearch";
@@ -116,12 +116,15 @@ function App() {
   </button>
 </div>
 
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/booksearch" element={<BookSearch userId={user.uid} />} />
-          <Route path="/booklist" element={<BookList userId={user.uid} />} />
-          <Route path="/editbook/:bookId" element={<EditBook userId={user.uid} />} />
-        </Routes>
+       <Router>
+  <Navbar />
+  <Routes>
+    <Route path="/" element={<Homepage />} />
+    <Route path="/booksearch" element={<BookSearch userId={user.uid} />} />
+    <Route path="/booklist" element={<BookList userId={user.uid} />} />
+    <Route path="/editbook/:bookId" element={<EditBook userId={user.uid} />} />
+  </Routes>
+</Router>
       </div>
     </Router>
   );
