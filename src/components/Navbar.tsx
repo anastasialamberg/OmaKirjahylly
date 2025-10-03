@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
               to="/"
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
-              Home
+              Etusivu
             </Link>
           </li>
           <li>
