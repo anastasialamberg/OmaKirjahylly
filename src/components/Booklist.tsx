@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getFavorites, removeFromFavorites, type Book } from "./Favorites";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 interface Props {
   userId: string;
