@@ -1,7 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Homepage() {
-  const navigate = useNavigate();
   return (
     <div className="min-h-screen ">
       <div className="grid place-items-center min-h-screen px-4">
@@ -14,19 +13,19 @@ function Homepage() {
             tutustu kokoelmaasi!
           </p>
           <div className="flex flex-col gap-4">
-            <button
-              className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-5 rounded-xl shadow transition text-center"
-              onClick={() => navigate("/booksearch")}
+            <Link
+              to="/booksearch"
+              className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-5 rounded-xl shadow transition text-center inline-block"
             >
               Lisää uusi kirja
-            </button>
+            </Link>
 
-            <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 px-5 rounded-xl shadow transition"
-              onClick={() => navigate("/booklist")}
+            <Link
+              to="/booklist"
+              className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 px-5 rounded-xl shadow transition inline-block"
             >
               Selaa kirjoja
-            </button>
+            </Link>
           </div>
         </div>
       </div>
