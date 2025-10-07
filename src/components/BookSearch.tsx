@@ -41,21 +41,23 @@ const BookSearch: React.FC<BookSearchProps> = ({ userId }) => {
     let mappedBooks: Book[] =
       data.items?.map((item: any) => ({
         id: item.id,
-        title: item.volumeInfo.title,
+        title: item.volumeInfo.title || "Nimetön kirja",
         authors: item.volumeInfo.authors,
         thumbnail: item.volumeInfo.imageLinks?.thumbnail || null,
         publishedDate: item.volumeInfo.publishedDate || "",
         publisher: item.volumeInfo.publisher || "",
       })) || [];
 
-    if (query.trim() !== "") {
-      const lowerQuery = query.toLowerCase();
-      mappedBooks = mappedBooks.filter(
-        (book) =>
-          book.title.toLowerCase().includes(lowerQuery) ||
-          book.authors?.some((a) => a.toLowerCase().includes(lowerQuery))
-      );
-    }
+   if (query.trim() !== "") {
+  const lowerQuery = query.toLowerCase();
+  mappedBooks = mappedBooks.filter((book) => {
+    const titleMatch = book.title?.toLowerCase().includes(lowerQuery);
+    const authorMatch = book.authors?.some((a) =>
+      a?.toLowerCase().includes(lowerQuery)
+    );
+    return titleMatch || authorMatch;
+  });
+}
 
     setBooks(mappedBooks);
     setPage(pageIndex);

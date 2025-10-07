@@ -12,19 +12,19 @@ function Homepage() {
             Hallitse ja selaa kirjoja helposti. Aloita lisäämällä uusi kirja tai
             tutustu kokoelmaasi!
           </p>
-          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4">
             <Link
               to="/booksearch"
-              className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-5 rounded-xl shadow transition text-center inline-block"
+              className="bg-[rgb(49,111,159)] !text-white font-semibold py-3 px-6 rounded-xl border border-slate-300 shadow-md hover:shadow-lg hover:bg-[rgb(39,96,140)] transform hover:-translate-y-0.5 transition-all duration-200"
             >
-              Lisää uusi kirja
+              📖 Lisää uusi kirja
             </Link>
 
             <Link
               to="/booklist"
-              className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 px-5 rounded-xl shadow transition inline-block"
+              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-2xl shadow-md hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
             >
-              Selaa kirjoja
+              🔍 Selaa kirjoja
             </Link>
           </div>
         </div>

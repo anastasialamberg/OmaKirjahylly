@@ -29,12 +29,13 @@ body {
 /* Linkit */
 a {
   font-weight: 500;
-  color: #3b82f6; 
+  color: rgb(49, 111, 159); 
+  
   text-decoration: none;
   transition: color 0.2s ease;
 }
 a:hover {
-  color: #2563eb; 
+  color: rgb(49, 111, 159); 
 }
 
 /* Otsikot */
