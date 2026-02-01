@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { addToFavorites, type Book, getFavorites } from "./Favorites";
 import searchImage from "../images/undraw_web-search.svg";
 
+
 interface BookSearchProps {
   userId: string;
 }
