@@ -24,7 +24,6 @@ BookTracker is a web application built with React and TypeScript that allows use
 
 ## Getting Started (Local Setup)
 
-### 1. Clone the repository
 
 ```bash
 git clone https://github.com/anastasialamberg/BookTracker.git
